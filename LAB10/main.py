@@ -35,27 +35,31 @@ def adams_bash(funct, n, t0, tn, y0):
     return tn, y
 
 
+# def function(x, y):
+#     return x + y
+
+
 def function(x, y):
     return 0.7 * (1 - y ** 2) / (2 * x ** 2 + y ** 2 + 1)
 
 
 print("\nМетод Рунге-Кутта:")
 t = time.perf_counter()
-runge_kutta = runge_kutta_method(function, 1000, 0.001, 0, 0)
+runge_kutta = runge_kutta_method(function, 100000, 0.00001, 0, 0)
 t_w = time.perf_counter() - t
 print(f"В точке ({round(runge_kutta[0])}) имеет значение: {'%.6f' % runge_kutta[1]}")
-print(f"Время выполнения: {'%.6f' % t_w}")
+print(f"Время: {'%.6f' % t_w}")
 
 print("\nМетод Адамса:")
 t = time.perf_counter()
-adams_bash = adams_bash(function, 1000, 0, 1, 0)
+adams_bash = adams_bash(function, 100000, 0, 1, 0)
 t_w = time.perf_counter() - t
 print(f"В точке ({adams_bash[0]}) имеет значение:\n {adams_bash[1]}")
-print(f"Время выполнения: {'%.6f' % t_w}")
+print(f"Время: {'%.6f' % t_w}")
 
 x_str = [0]
-for i in range(1000, 0, -1):
-    x_str.append(x_str[1000 - i] + 1 / 1000)
+for i in range(100000, 0, -1):
+    x_str.append(x_str[100000 - i] + 1 / 100000)
 plt.plot(x_str, adams_bash[1], "xb")
 plt.grid(True)
 plt.axis("equal")
